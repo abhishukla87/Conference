@@ -20,8 +20,7 @@ namespace ConferenceAPI
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+                
         public void ConfigureServices(IServiceCollection services)
         {     
             services.AddApiVersioning(opt =>
@@ -30,9 +29,7 @@ namespace ConferenceAPI
                 opt.ApiVersionReader = new HeaderApiVersionReader("Api-version");
             });
 
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-
-            // services.AddControllers(o => o.Filters.Add(new AuthorizeFilter()));
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));                  
 
             services.AddMvc(opt => opt.EnableEndpointRouting = false).
                 SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
@@ -43,8 +40,7 @@ namespace ConferenceAPI
             services.AddScoped<ISpeakerRepository,MockSpeakerRepository>();
 
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
